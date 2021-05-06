@@ -1,0 +1,20 @@
+{
+	"CN": "HzwOrg",
+	"hosts": [],
+	"key": {
+		"algo": "rsa",
+		"size": 2048
+	},
+	"name": [
+		{
+			"C": "CN",
+			"ST": "beijing",
+			"L": "beijing",
+			"O": "hzw",
+			"OU": "hzwself"
+		}
+	],
+	"ca": {
+		"expiry": "175200h"
+	}
+}

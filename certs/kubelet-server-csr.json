@@ -1,0 +1,22 @@
+{
+    "CN": "kubelet-server",
+    "hosts": [
+    "127.0.0.1",
+    "172.10.10.100",
+    "172.10.10.101",
+    "172.10.10.102"
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "beijing",
+            "L": "beijing",
+            "O": "hzw",
+            "OU": "hzwself"
+        }
+    ]
+}

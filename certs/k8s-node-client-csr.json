@@ -1,0 +1,18 @@
+{
+	"CN": "k8s-node-client",
+	"hosts": [
+	],
+	"key": {
+		"algo": "rsa",
+		"size": 2048
+	},
+	"name": [
+		{
+			"C": "CN",
+			"ST": "beijing",
+			"L": "beijing",
+			"O": "hzw",
+			"OU": "hzwself"
+		}
+	]
+}

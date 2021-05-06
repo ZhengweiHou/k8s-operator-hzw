@@ -1,0 +1,129 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  replicas: 1
+  # 允许保留RS历史的数量(历史RS可以用于回滚)
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      k8s-app: kubernetes-dashboard
+  template:
+    metadata:
+      labels:
+        k8s-app: kubernetes-dashboard
+    spec:
+      containers:
+        - name: kubernetes-dashboard
+          image: harbor.hzwod.com/k8s/ui/dashboard:v2.2.0 
+          imagePullPolicy: Always
+          resources:
+            # 资源最大限制，容器使用资源超限会OOM
+            limits:
+              cpu: 100m
+              memory: 300Mi
+            # 最少请求资源量，不配值默认和limits一致
+            requests:
+              cpu: 50m
+              memory: 100Mi
+          ports:
+            - containerPort: 8443
+              protocol: TCP
+          args:
+            # 自动生成证书
+            - --auto-generate-certificates
+            - --namespace=kubernetes-dashboard
+            # Uncomment the following line to manually specify Kubernetes API server Host
+            # If not specified, Dashboard will attempt to auto discover the API server and connect
+            # to it. Uncomment only if the default does not work.
+            # - --apiserver-host=http://my-address:port
+          # 容器的存活探针(一旦检测不通过，会停止该pod提供服务，重启pod)
+          livenessProbe:
+            httpGet:
+              scheme: HTTPS
+              path: /
+              port: 8443
+            # 容器启动30s后启动检测
+            initialDelaySeconds: 30
+            # 探针执行间隔
+            timeoutSeconds: 30
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsUser: 1001
+            runAsGroup: 2001
+          volumeMounts:
+            - name: kubernetes-dashboard-certs
+              mountPath: /certs
+              # Create on-disk volume to store exec logs
+            - mountPath: /tmp
+              name: tmp-volume
+      volumes:
+        - name: kubernetes-dashboard-certs
+          secret:
+            secretName: kubernetes-dashboard-certs
+        - name: tmp-volume
+          emptyDir: {}
+      serviceAccountName: kubernetes-dashboard
+      nodeSelector:
+        "kubernetes.io/os": linux
+      # Comment the following tolerations if Dashboard must not be deployed on master
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    k8s-app: dashboard-metrics-scraper
+  name: dashboard-metrics-scraper
+  namespace: kubernetes-dashboard
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      k8s-app: dashboard-metrics-scraper
+  template:
+    metadata:
+      labels:
+        k8s-app: dashboard-metrics-scraper
+      annotations:
+        seccomp.security.alpha.kubernetes.io/pod: 'runtime/default'
+    spec:
+      containers:
+        - name: dashboard-metrics-scraper
+          image: harbor.hzwod.com/k8s/ui/metrics-scraper:v1.0.6
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /
+              port: 8000
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp-volume
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsUser: 1001
+            runAsGroup: 2001
+      serviceAccountName: kubernetes-dashboard
+      nodeSelector:
+        "kubernetes.io/os": linux
+      # Comment the following tolerations if Dashboard must not be deployed on master
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+      volumes:
+        - name: tmp-volume
+          emptyDir: {}

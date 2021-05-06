@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: kube-mon
+  labels:
+    app: grafana
+spec:
+  type: LoadBalancer
+  selector:
+    app: grafana
+  ports:
+    - port: 80
+      targetPort: 3000
+      nodePort: 8002

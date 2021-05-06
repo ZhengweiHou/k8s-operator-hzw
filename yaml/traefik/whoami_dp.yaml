@@ -1,0 +1,108 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: whoami
+  labels:
+    app: myapp
+    name: whoami
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+      task: whoami
+  template:
+    metadata:
+      labels:
+        app: myapp
+        task: whoami
+    spec:
+      containers:
+        - name: whoami
+          image: harbor.hzwod.com/k8s/traefik/whoami:v1.6.1
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami
+spec:
+  ports:
+    - name: http
+      port: 80
+  selector:
+    app: myapp
+    task: whoami
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: whoamitcp
+  labels:
+    app: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+      task: whoamitcp
+  template:
+    metadata:
+      labels:
+        app: myapp
+        task: whoamitcp
+    spec:
+      containers:
+        - name: whoamitcp
+          image: harbor.hzwod.com/k8s/traefik/whoamitcp:v0.2.1
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoamitcp
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+  selector:
+    app: myapp
+    task: whoamitcp
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: whoamiudp
+  labels:
+    app: myapp
+    name: whoamiudp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+      task: whoamiudp
+  template:
+    metadata:
+      labels:
+        app: myapp
+        task: whoamiudp
+    spec:
+      containers:
+        - name: whoamiudp
+          image: harbor.hzwod.com/k8s/traefik/whoamiudp:v0.1.2
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoamiudp
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: myapp
+    task: whoamiudp
