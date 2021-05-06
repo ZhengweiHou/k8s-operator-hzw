@@ -25,12 +25,13 @@ spec:
             - --log.level=DEBUG
             - --api
             - --api.insecure
-            - --entrypoints.web.address=:80
-            - --entrypoints.tcpep.address=:8000
-            - --entrypoints.udpep.address=:9000/udp
+            - --entrypoints.traefik.address=:8180
+            - --entrypoints.web.address=:3080
+            - --entrypoints.tcpep.address=:8100
+            - --entrypoints.udpep.address=:9100/udp
             - --providers.kubernetesingress
             - --providers.kubernetescrd
-#            - --entryPoints.metrics.address=:8082
+            #- --entryPoints.metrics.address=:8082
             - --metrics=true
             - --metrics.prometheus=true
             - --metrics.prometheus.buckets=0.100000, 0.300000, 1.200000, 5.000000
@@ -40,12 +41,10 @@ spec:
 #            - --metrics.prometheus.manualrouting=true
           ports:
             - name: web
-              containerPort: 80
+              containerPort: 3080
             - name: admin
-              containerPort: 8080
+              containerPort: 8180
             - name: tcpep
-              containerPort: 8000
+              containerPort: 8100
             - name: udpep
-              containerPort: 9000
-            - name: metrics
-              containerPort: 8082
+              containerPort: 9100

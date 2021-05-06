@@ -17,4 +17,16 @@ data:
       - targets: ['kube-dns.kube-system:9153']
     - job_name: 'traefik'
       static_configs:
-        - targets: ['traefiktcp.default:8080']
+        - targets: ['traefiktcp.default:8180']
+    - job_name: 'kubernetes-nodes'
+      kubernetes_sd_configs:
+      - role: node
+      relabel_configs:
+      - action: replace    # 替换动作
+        source_labels: [__address__]    # 数组，指定多个label串联被regex匹配
+        target_label: __address__    # 替换的目标label
+        regex: '(.*):10250'    # 正则匹配source_labels指定的labels串联值
+        replacement: '${1}:9100'    # 为目标label替换后的值
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.*)
+
