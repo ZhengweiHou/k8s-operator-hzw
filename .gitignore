@@ -1,2 +1,3 @@
 scp.sh
 scp-back.sh
+*/*.pem
