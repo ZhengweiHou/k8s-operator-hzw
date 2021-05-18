@@ -15,9 +15,15 @@ data:
     - job_name: 'coredns'
       static_configs:
       - targets: ['kube-dns.kube-system:9153']
+
     - job_name: 'traefik'
       static_configs:
         - targets: ['traefiktcp.default:8180']
+
+    - job_name: 'ingress-nginx'
+      static_configs:
+        - targets: ['ingress-nginx-metrics.ingress-nginx:10254']
+
     - job_name: 'kubernetes-nodes'
       kubernetes_sd_configs:
       - role: node

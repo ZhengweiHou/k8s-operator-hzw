@@ -1,0 +1,52 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: whoami
+  labels:
+    name: whoami
+---
+
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: whoami
+  namespace: whoami
+  labels:
+    app: myapp
+    name: whoami
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+      task: whoami
+  template:
+    metadata:
+      labels:
+        name: whoami
+        app: myapp
+        task: whoami
+    spec:
+      containers:
+        - name: whoami
+          image: harbor.hzwod.com/k8s/traefik/whoami:v1.6.1
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami
+  namespace: whoami
+  labels:
+    name: whoami
+spec:
+  ports:
+    - name: http
+      port: 80
+  selector:
+    app: myapp
+    task: whoami
+
