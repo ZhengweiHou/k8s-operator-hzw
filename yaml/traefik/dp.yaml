@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: traefik-ingress-controller
       nodeSelector:
-        node-role.kubernetes.io/node: ""
+        node-role.kubernetes.io/node: "node"
       containers:
         - name: traefik
           image: harbor.hzwod.com/k8s/traefik:v2.2

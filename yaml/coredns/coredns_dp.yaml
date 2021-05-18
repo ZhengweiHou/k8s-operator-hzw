@@ -34,7 +34,7 @@ spec:
           operator: "Exists"
       nodeSelector:
         beta.kubernetes.io/os: linux
-        node-role.kubernetes.io/master: ""
+        node-role.kubernetes.io/master: "master"
       containers:
       - name: coredns
         image: harbor.hzwod.com/k8s/coredns:1.6.5
