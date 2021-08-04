@@ -1,0 +1,22 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:5.6
+    container_name: mysql_db
+      #    restart: always
+    volumes:
+      - /home/houzw/rundata/DATA_mysql:/var/lib/mysql
+        #      - /home/houzw/document/git-rep/k8s-operator-hzw/yaml/dockerruns/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - mysql_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+networks:
+  mysql_db:
+    external: false
