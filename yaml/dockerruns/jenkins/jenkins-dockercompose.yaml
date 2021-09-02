@@ -1,0 +1,20 @@
+version: '2'
+services:
+  my_jenkins-9001:
+    image: jenkins/jenkins:2.229
+    container_name: jenkins-9001
+    volumes:
+      - ~/rundata/jenkinshome:/var/jenkins_home
+      #- /data/plugins2:/var/jenkins_home/plugins
+      #- /usr/bin/docker:/usr/bin/docker
+      #- /var/run/docker.sock:/var/run/docker.sock
+      #- /usr/lib64/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7
+      # java
+      #- /opt/java/jdk1.8.0_172:/opt/java/jdk
+      # maven
+      #- /root/apache-maven-3.5.2:/opt/maven
+    ports:
+      - "9001:8080"
+   # environment:
+   #   - MAVEN_HOME=/opt/maven
+   #   - JAVA_HOME=/opt/java/jdk
