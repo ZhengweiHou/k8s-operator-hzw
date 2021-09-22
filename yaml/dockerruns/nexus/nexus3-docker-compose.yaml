@@ -1,0 +1,9 @@
+version: '2'
+services:
+  nexus:
+    image: sonatype/nexus3:3.30.1
+    container_name: nexus3
+    volumes:
+      - /home/houzw/rundata/data_nexus3:/nexus-data
+    ports:
+      - "8081:8081"

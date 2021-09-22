@@ -1,10 +1,11 @@
 version: '2'
 services:
   my_jenkins-9001:
-    image: jenkins/jenkins:2.229
+    image: jenkins/jenkins:2.303.1
     container_name: jenkins-9001
     volumes:
       - ~/rundata/jenkinshome:/var/jenkins_home
+      - /opt/node/node-v14.17.6-linux-x64:/opt/node/node-v14.17.6-linux-x64
       #- /data/plugins2:/var/jenkins_home/plugins
       #- /usr/bin/docker:/usr/bin/docker
       #- /var/run/docker.sock:/var/run/docker.sock
