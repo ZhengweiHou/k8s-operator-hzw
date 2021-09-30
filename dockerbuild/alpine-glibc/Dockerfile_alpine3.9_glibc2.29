@@ -5,8 +5,8 @@ ENV LANG=C.UTF-8
 RUN apk add strace
 # Here we install GNU libc (aka glibc) and set C.UTF-8 locale as default.
 
-#RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
-RUN ALPINE_GLIBC_BASE_URL="192.168.104.139:8001" && \
+RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
+#RUN ALPINE_GLIBC_BASE_URL="192.168.104.139:8001" && \
     ALPINE_GLIBC_PACKAGE_VERSION="2.29-r0" && \
     ALPINE_GLIBC_BASE_PACKAGE_FILENAME="glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_BIN_PACKAGE_FILENAME="glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \

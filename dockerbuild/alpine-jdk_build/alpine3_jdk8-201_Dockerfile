@@ -1,7 +1,7 @@
 #FROM alpine:3.13
 FROM frolvlad/alpine-glibc:alpine-3.14_glibc-2.33
 
-MAINTAINER houzw "houzw@allinfinance.com"
+MAINTAINER houzw "houzw"
 
 ADD jdk-8u201-linux-x64.tar.gz  /opt/java
 
