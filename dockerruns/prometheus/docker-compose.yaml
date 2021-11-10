@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+    prometheus:
+      image: prom/prometheus:v2.26.0
+      container_name: prometheus
+      hostname: prometheus
+        #restart: always
+        #volumes:
+        #  - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+        #  - ./config/node_down.yml:/etc/prometheus/node_down.yml
+      ports:
+        - "9090:9090"
+

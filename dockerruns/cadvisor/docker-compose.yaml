@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+    cadvisor:
+      image: google/cadvisor:v0.33.0
+      container_name: cadvisor
+      #restart: always
+      privileged: true
+#      volumes:
+#        - /:/rootfs:ro
+#        - /var/run:/var/run:rw
+#        - /sys:/sys:ro
+#        - /var/lib/docker/:/var/lib/docker:ro
+#        - /dve/disk:/dev/desk:ro
+      ports:
+        - 8081:8080
+
