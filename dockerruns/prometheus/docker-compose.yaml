@@ -6,9 +6,15 @@ services:
       container_name: prometheus
       hostname: prometheus
         #restart: always
-        #volumes:
-        #  - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      volumes:
+        - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
         #  - ./config/node_down.yml:/etc/prometheus/node_down.yml
+      command: 
+        - --config.file=/etc/prometheus/prometheus.yml
+        - --storage.tsdb.path=/prometheus
+        - --web.console.libraries=/usr/share/prometheus/console_libraries
+        - --web.enable-lifecycle
+        - --web.console.templates=/usr/share/prometheus/consoles
       ports:
         - "9090:9090"
 
