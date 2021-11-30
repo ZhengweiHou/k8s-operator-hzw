@@ -1,7 +1,7 @@
 # my global config
 global:
-  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  scrape_interval:     5s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 5s # Evaluate rules every 15 seconds. The default is every 1 minute.
   # scrape_timeout is set to the global default (10s).
 
 # Alertmanager configuration
@@ -31,3 +31,11 @@ scrape_configs:
     metrics_path: '/nacos/actuator/prometheus'
     static_configs:
       - targets: ['192.168.104.139:8848']
+  - job_name: 'sofa1-hzw'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['192.168.104.139:8011','192.168.104.139:8021','192.168.104.139:8031']
+  - job_name: 'sofa2-hzw'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['192.168.104.139:8101']
