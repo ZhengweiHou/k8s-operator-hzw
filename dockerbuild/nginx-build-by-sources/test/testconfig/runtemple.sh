@@ -1,0 +1,1 @@
+docker run --rm -v /home/houzw/document/temp/nginxbuild/testconfig/nginx.conf:/etc/nginx/nginx.conf -v /home/houzw/document/temp/nginxbuild/testconfig:/hzwconfig -p 8080:8080 -p 8443:443 nginx:1.20.1-alpine_sticky

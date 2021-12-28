@@ -1,0 +1,18 @@
+FROM docker.io/centos:7
+
+RUN JAVA_BASE_URL="http://192.168.104.139:8003" &&\
+    JAVA_JDK_FILE_NAME="jdk-8u201-linux-x64.tar.gz" && \
+    yum install wget -y && \
+    mkdir -p /opt/jdk8 && \
+    mkdir -p /opt/temp && \
+    wget "${JAVA_BASE_URL}/${JAVA_JDK_FILE_NAME}" -O /opt/temp/sources.tar.gz && \
+    tar -xzf /opt/temp/sources.tar.gz -C /opt/temp && \
+    mv /opt/temp/jdk*/* /opt/jdk8/ && \
+    rm -rf /opt/temp && \
+    yum remove wget -y && \
+    yum clean all
+    
+ENV JAVA_HOME /opt/jdk8
+ENV PATH $PATH:$JAVA_HOME/bin
+
+CMD ["/bin/bash"]
