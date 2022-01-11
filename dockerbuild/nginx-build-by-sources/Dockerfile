@@ -28,6 +28,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	#&& curl -fSL https://bitbucket.org/nginx-goodies/nginx-sticky-module-ng/get/$NGINX_STICKY_MODULE_NG_VERSION.tar.gz -o nginx-sticky-module-ng.tar.gz \
 	##&& curl -fSL https://github.com/DawtCom/nginx-upstream-dynamic-servers/archive/$NGINX_UPSTREAM_DYNAMIC_SERVERS_VERSION.tar.gz -o nginx-upstream-dynamic-servers.tar.gz \
 	#&& curl -fSL https://github.com/GUI/nginx-upstream-dynamic-servers/archive/$NGINX_UPSTREAM_DYNAMIC_SERVERS_VERSION.tar.gz -o nginx-upstream-dynamic-servers.tar.gz \
+    # 此处提前将相关文件下载到本地，本地启动文件服务，降低编译时间
 	&& curl -fSL http://192.168.104.139:8001/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
 	&& curl -fSL http://192.168.104.139:8001/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
 	&& curl -fSL http://192.168.104.139:8001/nginx-goodies-nginx-sticky-module-ng-${NGINX_STICKY_MODULE_NG_VERSION}.tar.gz -o nginx-sticky-module-ng.tar.gz \
