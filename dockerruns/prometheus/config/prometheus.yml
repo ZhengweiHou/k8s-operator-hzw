@@ -39,3 +39,8 @@ scrape_configs:
     metrics_path: '/metrics'
     static_configs:
       - targets: ['192.168.104.139:8101']
+  - job_name: 'newcore'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['127.0.0.1:9090']
+
