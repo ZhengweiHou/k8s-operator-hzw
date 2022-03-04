@@ -27,10 +27,10 @@ scrape_configs:
   #    static_configs:
   #      - targets: ['localhost:9090']
 
-  #  - job_name: 'nacos'
-  #    metrics_path: '/nacos/actuator/prometheus'
-  #    static_configs:
-  #      - targets: ['192.168.104.139:8848']
+  - job_name: 'nacos'
+    metrics_path: '/nacos/actuator/prometheus'
+    static_configs:
+      - targets: ['192.168.105.34:8848']
   #  - job_name: 'sofa1-hzw'
   #    metrics_path: '/metrics'
   #    static_configs:
@@ -39,10 +39,10 @@ scrape_configs:
   #    metrics_path: '/metrics'
   #    static_configs:
   #      - targets: ['192.168.104.139:8101']
-  - job_name: 'newcore'
-    metrics_path: '/metrics'
-    static_configs:
-      - targets: ['192.168.105.34:9100']
+  #  - job_name: 'newcore'
+  #    metrics_path: '/metrics'
+  #    static_configs:
+  #      - targets: ['192.168.105.34:9100']
   - job_name: 'jmx_java'
     static_configs:
       - targets: 
