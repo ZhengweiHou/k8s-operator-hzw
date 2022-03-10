@@ -1,0 +1,19 @@
+---
+version: "2"
+services:
+  bookstack:
+    image: linuxserver/bookstack:22.02.2
+    container_name: bookstack
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - APP_URL=
+      - DB_HOST=192.168.56.201
+      - DB_USER=root
+      - DB_PASS=root
+      - DB_DATABASE=bookstackapp
+    volumes:
+      - /home/houzw/rundata/bookstack:/config
+    ports:
+      - 8001:80
+#    restart: unless-stopped

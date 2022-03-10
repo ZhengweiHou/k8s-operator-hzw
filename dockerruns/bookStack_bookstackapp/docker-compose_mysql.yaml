@@ -1,0 +1,37 @@
+---
+version: "2"
+services:
+  bookstack:
+    image: linuxserver/bookstack:22.02.2
+    container_name: bookstack
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - APP_URL=
+      - DB_HOST=bookstack_db
+      - DB_USER=bookstack
+      - DB_PASS=bookstack
+      - DB_DATABASE=bookstackapp
+    volumes:
+      - /home/houzw/rundata/bookstack:/config
+    ports:
+      - 6875:80
+#    restart: unless-stopped
+    depends_on:
+      - bookstack_db
+  bookstack_db:
+    image: mysql:5.6
+    container_name: bookstack_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=bookstackapp
+      - MYSQL_USER=bookstack
+      - MYSQL_PASSWORD=bookstack
+    volumes:
+      - /home/houzw/rundata/DATA_mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+        #    deploy:
+        #      resources:
+        #        limits:
+        #          memory: 4G
