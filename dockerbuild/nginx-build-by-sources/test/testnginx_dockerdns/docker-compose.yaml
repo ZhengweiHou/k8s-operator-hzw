@@ -1,18 +1,13 @@
 version: '3.9'
 services:
-  centospyfile:
-    image: centos:7
+  whoami:
+    image: containous/whoami:v1.5.0
     deploy:
       replicas: 3
-    command: python -m SimpleHTTPServer 8080 
-    dns:
-      - 8.8.8.8
   proxy_nginx:
     image: nginx:1.20.1-alpine_sticky
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 8001:8080
-    dns:
-      - 8.8.8.8
 
