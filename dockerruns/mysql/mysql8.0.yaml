@@ -15,6 +15,11 @@ services:
       - /home/houzw/rundata/DATA_mysql/data:/var/lib/mysql
       - /home/houzw/rundata/DATA_mysql/log:/var/log/mysql
       - ./my8.cnf:/etc/my.cnf
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+
 
   mysql8_adminer:
     image: adminer:4.8.1

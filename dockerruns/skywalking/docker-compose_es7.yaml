@@ -1,0 +1,52 @@
+version: '3.5'
+services:
+  sky_es:
+    image: elasticsearch:7.14.1
+    container_name: sky_es
+#    restart: always
+    ports:
+      - 9200:9200
+    environment:
+      discovery.type: single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    deploy:
+      resources:
+        limits:
+          memory: 5G
+  sky_oap:
+    image: apache/skywalking-oap-server:8.5.0-es7
+    container_name: sky_oap
+    depends_on:
+      - sky_es
+    links:
+      - sky_es
+#    restart: always
+    ports:
+      - 11800:11800
+      - 12800:12800
+    environment:
+      SW_STORAGE: elasticsearch7
+      SW_STORAGE_ES_CLUSTER_NODES: sky_es:9200
+      SW_HEALTH_CHECKER: default
+      SW_TELEMETRY: prometheus
+    healthcheck:
+      test: ["CMD", "./bin/swctl", "ch"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+  sky_ui:
+    image: apache/skywalking-ui:8.5.0
+    container_name: sky_ui
+    depends_on:
+      - sky_oap
+    links:
+      - sky_oap
+#    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      SW_OAP_ADDRESS: sky_oap:12800
