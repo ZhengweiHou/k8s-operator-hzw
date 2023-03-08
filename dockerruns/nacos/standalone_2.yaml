@@ -1,0 +1,15 @@
+version: "2"
+services:
+  nacos2:
+    #image: nacos/nacos-server:${NACOS_VERSION}
+    image: nacos/nacos-server:1.4.1
+    container_name: nacos-standalone2
+    environment:
+    - PREFER_HOST_MODE=hostname
+    - MODE=standalone
+    volumes:
+      #    - ./standalone-logs/:/home/nacos/logs
+    - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
+    ports:
+    - "8849:8848"
+    - "9849:9848"

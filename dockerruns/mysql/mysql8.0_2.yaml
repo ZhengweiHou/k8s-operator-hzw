@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  mysql8_2:
+    image: mysql:8.0.28
+    container_name: mysql8_db2
+    command: --default-authentication-plugin=mysql_native_password
+    privileged: true
+#    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - /home/houzw/rundata/DATA_mysql/data2:/var/lib/mysql
+      - /home/houzw/rundata/DATA_mysql/log2:/var/log/mysql
+      - ./my8.cnf:/etc/my.cnf
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+
+

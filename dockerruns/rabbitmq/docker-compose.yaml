@@ -1,0 +1,18 @@
+version: '3.5'
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+      - 25672:25672
+      - 61613:61613
+      - 1883:1883
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+      RABBITMQ_LOGS: 
+      RABBITMQ_LOG_BASE: /var/log/rabbitmq
+    volumes:
+      - /home/houzw/rundata/dockerdata_rebbitmq/log:/var/log/rabbitmq
