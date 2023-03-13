@@ -1,5 +1,0 @@
-2022-05-09 15:22:02 INFO main - instrumented a special java.util.Set into: sun.nio.ch.EPollSelectorImpl@610694f1
-2022-05-09 15:22:02 INFO main - instrumented a special java.util.Set into: sun.nio.ch.EPollSelectorImpl@35d176f7
-2022-05-09 15:22:02 INFO main - instrumented a special java.util.Set into: sun.nio.ch.EPollSelectorImpl@1dfe2924
-2022-05-09 15:22:02 INFO main - instrumented a special java.util.Set into: sun.nio.ch.EPollSelectorImpl@6ebc05a6
-2022-05-09 15:22:03 WARN main - Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x8eb802c5]'
