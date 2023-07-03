@@ -9,13 +9,18 @@ services:
   kafka:
     image: wurstmeister/kafka:2.13-2.8.1
     container_name: kafka
-    ports:
-      - 9092:9092
+    network_mode: "host"
+    #ports:
+    #  - 9092:9092
     environment:
+      # 在kafka集群中，每个kafka都有一个BROKER_ID来区分自己
       KAFKA_BROKER_ID: 0
-      #kafka 监听的ip端口
+      # kafka 监听的ip端口
+      #KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_LISTENERS: PLAINTEXT://localhost:9092
       # kafka 注册到zk中的ip
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-      KAFKA_ZOOKEEPER_CONNECT: kafka_zk:2181
+      # 配置zookeeper管理kafka的路径
+      #KAFKA_ZOOKEEPER_CONNECT: kafka_zk:2181
+      KAFKA_ZOOKEEPER_CONNECT: localhost:2181
       KAFKA_JVM_PERFORMANCE_OPTS: "-Xmx256m -Xms256m"
