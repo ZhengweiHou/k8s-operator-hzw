@@ -1,0 +1,16 @@
+python:
+  - "2.7.11"
+install:
+    - sudo pip install Enum34 subprocess32 mock nose-parameterized pyyaml
+script:
+  - python -m unittest discover
+notifications:
+  email:
+    recipients:
+      - hanna@ca.ibm.com
+    on_success: never
+    on_failure: always
+branches:
+  only:
+    - master
+    - release

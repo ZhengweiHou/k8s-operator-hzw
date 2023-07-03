@@ -1,0 +1,5 @@
+db2.yml
+cert
+docs/*
+*.pyc
+.vscode

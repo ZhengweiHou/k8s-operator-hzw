@@ -1,0 +1,22 @@
+version: '2'
+services:
+  athens:
+    container_name: athens
+    image: gomods/athens:v0.12.0-rc1
+      #image: gomods/athens:v0.11.0
+    ports:
+      - "3000:3000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10m
+        max-file: "5"
+#    restart: always
+    volumes:
+      - /home/houzw/rundata/data_athens:/data/athens
+      - ./config:/config
+    environment:
+      ATHENS_DISK_STORAGE_ROOT: /data/athens
+      ATHENS_STORAGE_TYPE: disk
+      ATHENS_DOWNLOAD_MODE: sync
+      ATHENS_SUM_DBS: "https://sum.golang.google.cn"

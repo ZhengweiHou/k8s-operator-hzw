@@ -1,0 +1,13 @@
+[June 25, 2019]
+
+* Upgrade to 11.5
+* Move container from Docker Store to DockerHub
+
+[July 14, 2017]
+
+* Added more db2 config data exported to shared mount
+
+[July 6, 2017]
+
+* Added supervisord to export instance configuration and databases
+

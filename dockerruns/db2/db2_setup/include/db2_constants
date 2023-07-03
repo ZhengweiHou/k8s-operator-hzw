@@ -1,0 +1,58 @@
+#!/bin/bash
+
+###############################################################################
+#   Common constants used to initialize DB2 in a Docker container
+#
+# Copyright 2017, IBM Corporation
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
+: ${LICENSE:=decline}
+: ${DB2INSTANCE:=db2inst1}
+: ${DB2INST1_PASSWORD:=$(pwgen -c -n -1 12)}
+: ${BLU:=false}
+: ${DBNAME:=}
+: ${ENABLE_ORACLE_COMPATIBILITY:=false}
+: ${UPDATEAVAIL:=NO}
+: ${SAMPLEDB:=false}
+: ${REPODB:=false}
+: ${IS_OSXFS:=false}
+: ${PERSISTENT_HOME:=true}
+: ${DB2DEVCE:=false}
+: ${HADR_ENABLED:=false}
+: ${ETCD_ENDPOINT:=}
+: ${ETCD_USERNAME:=}
+: ${ETCD_PASSWORD:=}
+: ${IS_KUBE:=false}
+: ${DATA_DIR:=${STORAGE_DIR?}/data}
+: ${DBLOG_DIR:=${STORAGE_DIR?}/logs}
+: ${CONFIG_DIR:=${STORAGE_DIR?}/config}
+: ${BACKUP_DIR:=${STORAGE_DIR?}/backup}
+: ${TEXT_SEARCH:=false}
+: ${ARCHIVE_LOGS:=true}
+: ${AUTOCONFIG:=true}
+
+TRUE=0
+FALSE=1
+IBM_PRODUCT=Db2
+FENCED_USER=db2fenc1
+INST_GROUP=db2iadm1
+FENCED_GROUP=db2fadm1
+DB2DIR=/opt/ibm/db2/V11.5
+CONFIG_FILE=${CONFIG_DIR?}/dbdbmcfg
+LICENSE_FILE=${SETUPDIR?}/include/${LICENSE_NAME?}
+test "${PERSISTENT_HOME?}" = "false" &&  DB2INSTANCE_HOME=/home/${DB2INSTANCE?} || DB2INSTANCE_HOME=${CONFIG_DIR?}/${DB2INSTANCE?}
+test "${PERSISTENT_HOME?}" = "false" &&  DB2FENCED_HOME=/home/${FENCED_USER?} || DB2FENCED_HOME=${CONFIG_DIR?}/${FENCED_USER?}
+PROFILE_SOURCE=${SETUPDIR?}/include/profile_source
+SETUP_COMPLETE=${CONFIG_DIR?}/.shared-data/setup_complete
+PLATFORM=`uname -i | tr -d '\n'`
+
+# HADR Specific variables
+: ${HADR_ROLE_FOR_SETUP:="STANDBY"}
+HADR_LOAD_COPY_PATH=${HADR_SHARED_DIR?}
+HADR_CONFIG_FILE=${HADR_SHARED_DIR?}/hadr.cfg
+HADR_CONFIG_LOCKFILE=${HADR_SHARED_DIR?}/hadr.cfg.lock

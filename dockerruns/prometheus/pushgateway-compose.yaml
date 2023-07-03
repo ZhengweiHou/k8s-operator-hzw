@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+    pushgateway:
+      image: prom/pushgateway:latest
+      container_name: pushgateway
+      ports:
+        - "9091:9091"
+

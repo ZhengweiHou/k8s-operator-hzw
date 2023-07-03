@@ -1,18 +1,18 @@
 version: '3.1'
 
 services:
-  db2_1:
+  db2_3:
     image: ibmcom/db2:11.5.8.0
-    container_name: db2_1
+    container_name: db2_3
     privileged: true
     ports:
-      - 50001:50000
+      - 50003:50000
     environment:
       LICENSE: accept
       DB2INST1_PASSWORD: db2inst1
       DBNAME: testdb
     volumes:
-      - /home/houzw/rundata/DATA_db2/database1:/database
+      - /home/houzw/rundata/DATA_db2/database3:/database
     deploy:
       resources:
         limits:
