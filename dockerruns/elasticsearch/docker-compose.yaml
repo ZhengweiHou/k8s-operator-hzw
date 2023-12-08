@@ -2,10 +2,12 @@ version: '3.5'
 services:
   es:
     image: elasticsearch:7.14.1
+    #image: elasticsearch:7.6.2
+    hostname: elastic
     container_name: es
-#    restart: always
     ports:
-      - 9200:9200
+      - "9200:9200"
+      - "9300:9300"
     environment:
       discovery.type: single-node
     ulimits:

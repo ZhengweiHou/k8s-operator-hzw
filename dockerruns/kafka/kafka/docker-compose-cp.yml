@@ -1,0 +1,30 @@
+version: '2'
+services:
+  kafka_zk_cp:
+    container_name: kafka_zk_cp
+    image: zookeeper:3.8.1
+    ports:
+      - "2181:2181"
+  kafka_cp:
+    image: confluentinc/cp-kafka:7.5.2
+    container_name: kafka_cp
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      #KAFKA_ADVERTISED_HOST_NAME: 192.168.105.60
+      KAFKA_ADVERTISED_HOST_NAME: 172.55.55.55
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka_cp:29092,PLAINTEXT_HOST://localhost:9092'
+        #KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: kafka_zk_cp:2181
+        #      KAFKA_LISTENERS: 'PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

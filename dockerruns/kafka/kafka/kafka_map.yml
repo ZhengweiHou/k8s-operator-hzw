@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  kafka_map:
+    container_name: kafka_map
+    image: dushixiang/kafka-map:latest
+    network_mode: "host"
+    ports:
+      - "8080:8080"
+    environment:
+      DEFAULT_USERNAME: admin
+      DEFAULT_PASSWORD: admin
