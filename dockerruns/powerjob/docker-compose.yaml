@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  powerjob:
+    image: powerjob/powerjob-server:4.3.9
+    container_name: powerjob-server
+    privileged: true
+    ports:
+      - 7700:7700
+      #      - 10086:10086
+      #      - 10010:10010
+    environment:
+      TZ: Asia/Shanghai
+      JVMOPTIONS: ''
+      PARAMS: "--spring.config.location=/application.properties"
+    volumes:
+      - ./application.properties:/application.properties
+

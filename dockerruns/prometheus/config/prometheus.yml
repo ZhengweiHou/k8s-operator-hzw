@@ -28,8 +28,7 @@ scrape_configs:
   #      - targets: ['localhost:9090']
 
   #- job_name: 'nacos'
-  #  metrics_path: '/nacos/actuator/prometheus'
-  #  static_configs:
+  #  metrics_path: '/nacos/actuator/prometheus' #  static_configs:
   #    - targets: ['192.168.105.34:8848']
   #  - job_name: 'sofa1-hzw'
   #    metrics_path: '/metrics'
@@ -48,15 +47,20 @@ scrape_configs:
   #      - targets: 
   #        - '192.168.105.34:19100'
   #        - '192.168.105.34:19200'
-  - job_name: 'golang'
+  #- job_name: 'golang'
+  #  static_configs:
+  #    - targets: 
+  #      - '192.168.105.15:8081'
+  #      - '192.168.105.15:8082'
+  #      - '192.168.105.15:8083'
+  #- job_name: 'pushgateway'
+  #  static_configs:
+  #    - targets: 
+  #      - '192.168.105.15:9091'
+  #      - '192.168.105.15:8080'
+  - job_name: 'dfhub'
     static_configs:
       - targets: 
-        - '192.168.105.15:8081'
-        - '192.168.105.15:8082'
-        - '192.168.105.15:8083'
-  - job_name: 'pushgateway'
-    static_configs:
-      - targets: 
-        - '192.168.105.15:9091'
-        - '192.168.105.15:8080'
-
+        - '172.17.0.1:9021'
+        - '172.17.0.1:9022'
+        - '172.17.0.1:9023'

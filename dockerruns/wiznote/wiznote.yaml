@@ -1,0 +1,18 @@
+version: '3.1'
+
+# docker run --name wiz --restart=always -it -d -v  ~/wizdata:/wiz/storage -v  /etc/localtime:/etc/localtime -p 80:80 -p 9269:9269/udp  wiznote/wizserver
+
+services:
+  wiznote_server:
+    image: wiznote/wizserver:latest
+    container_name: wiznote_server
+    ports:
+      - 3380:80
+      - 3369:9269
+    volumes:
+      - /home/houzw/rundata/DATA_wiznote/storage:/wiz/storage
+      - /etc/localtime:/etc/localtime
+    deploy:
+      resources:
+        limits:
+          memory: 10G

@@ -1,0 +1,65 @@
+version: '3'
+services:
+  redis-master:
+    image: redis
+    container_name: redis-master
+    command: redis-server 
+      --requirepass 123456
+      --masterauth 123456
+      --slave-serve-stale-data yes
+      --slave-read-only yes
+      --repl-diskless-sync no
+      --repl-diskless-sync-delay 5
+      --repl-disable-tcp-nodelay no
+      --slave-priority 200
+      --port 37370
+    restart: always
+    ports:
+      - 37370:37370
+    sysctls:
+      # 必要的内核参数
+      net.core.somaxconn: '511'
+
+  redis-slave-1:
+    image: redis
+    container_name: redis-slave-1
+    restart: always
+    ports:
+      - 37371:37371
+    command: redis-server 
+      --requirepass 123456
+      --slave-serve-stale-data yes
+      --slave-read-only yes
+      --repl-diskless-sync no
+      --repl-diskless-sync-delay 5
+      --repl-disable-tcp-nodelay no
+      --slave-priority 150
+      --slaveof redis-master 37370 
+      --masterauth 123456
+      --port 37371
+    sysctls:
+      # 必要的内核参数
+      net.core.somaxconn: '511'
+      
+  redis-slave-2:
+    image: redis
+    container_name: redis-slave-2
+    restart: always
+    ports:
+      - 37372:37372
+    command: redis-server 
+      --requirepass 123456
+      --slave-serve-stale-data yes
+      --slave-read-only yes
+      --repl-diskless-sync no
+      --repl-diskless-sync-delay 5
+      --repl-disable-tcp-nodelay no
+      --slave-priority 100
+      --slaveof redis-master 37370 
+      --masterauth 123456
+      --port 37372
+    sysctls:
+      # 必要的内核参数
+      net.core.somaxconn: '511'
+
+

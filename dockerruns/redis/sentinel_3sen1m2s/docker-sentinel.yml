@@ -1,0 +1,44 @@
+version: '3'
+services:
+  sentinel1:
+    image: redis
+    container_name: redis-sentinel-1
+    restart: always
+    ports:
+      - 37376:37376
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    volumes:
+      - /home/redis/config/sentinel1.conf:/usr/local/etc/redis/sentinel.conf
+    #   - ./data/redis-sentinel:/data
+    sysctls:
+      # 必要的内核参数
+      net.core.somaxconn: '511'
+      
+  sentinel2:
+    image: redis
+    container_name: redis-sentinel-2
+    restart: always
+    ports:
+      - 37377:37377
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    volumes:
+      - /home/redis/config/sentinel2.conf:/usr/local/etc/redis/sentinel.conf
+    #   - ./data/redis-sentinel:/data
+    sysctls:
+      # 必要的内核参数
+      net.core.somaxconn: '511'
+      
+  sentinel3:
+    image: redis
+    container_name: redis-sentinel-3
+    restart: always
+    ports:
+      - 37378:37378
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    volumes:
+      - /home/redis/config/sentinel3.conf:/usr/local/etc/redis/sentinel.conf
+    #   - ./data/redis-sentinel:/data
+    sysctls:
+      # 必要的内核参数
+      net.core.somaxconn: '511'
+

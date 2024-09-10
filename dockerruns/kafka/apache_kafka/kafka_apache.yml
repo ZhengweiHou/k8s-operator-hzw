@@ -1,0 +1,11 @@
+---
+version: '2'
+services:
+  kafka_apache:
+    image: apache/kafka:3.7.0_hzw
+    #image: apache/kafka:3.7.0
+    container_name: kafka_apache
+    ports:
+      - "9092:9092"
+    environment:
+      HZW: hzw
