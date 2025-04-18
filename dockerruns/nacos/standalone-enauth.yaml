@@ -1,15 +1,19 @@
 version: "2"
 services:
-  nacos:
+  nacos-enauth:
     #image: nacos/nacos-server:${NACOS_VERSION}
     image: nacos/nacos-server:v2.0.3
-    container_name: nacos-standalone
+    container_name: nacos-standalone-enauth
     environment:
-    - PREFER_HOST_MODE: hostname
-    - MODE: standalone
+    - JVM_XMS=512m
+    - JVM_XMX=512m
+    - JVM_XMN=400m
+    - PREFER_HOST_MODE=hostname
+    - MODE=standalone
+    - NACOS_AUTH_ENABLE=true
     volumes:
       #    - ./standalone-logs/:/home/nacos/logs
     - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
     ports:
-    - "8848:8848"
-    - "9848:9848"
+    - "8849:8848"
+    - "9849:9848"

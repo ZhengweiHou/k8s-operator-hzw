@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: open-webui
+#    network_mode: "host"
+    ports:
+      - 3000:8080
+    environment:
+#      WEBUI_AUTH: False
+#      OLLAMA_BASE_URL: http://127.0.0.1:11434
+      OLLAMA_BASE_URL: http://192.168.105.63:11434
+#      OLLAMA_BASE_URL: http://172.17.0.1:11434
+    volumes:
+      - /home/houzw/rundata/open-webui:/app/backend/data
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 2G

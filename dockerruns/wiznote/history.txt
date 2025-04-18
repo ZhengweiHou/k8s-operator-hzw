@@ -1,0 +1,13 @@
+CREATED BY                                                                                                           SIZE      COMMENT
+CMD ["bash" "/wiz/app/entrypoint.sh"]                                                                                0B        buildkit.dockerfile.v0
+RUN /bin/sh -c rm -rf /wiz/scripts # buildkit                                                                        0B        buildkit.dockerfile.v0
+COPY /wiz/app/wizserver /wiz/app/wizserver # buildkit                                                                655MB     buildkit.dockerfile.v0
+COPY ./wiz /wiz # buildkit                                                                                           21.5MB    buildkit.dockerfile.v0
+RUN /bin/sh -c bash /wiz/scripts/buildProdScript.sh && rm /wiz/scripts/buildProdScript.sh # buildkit                 1.13GB    buildkit.dockerfile.v0
+COPY ./wiz /wiz # buildkit                                                                                           116MB     buildkit.dockerfile.v0
+ENV PKG_CONFIG_PATH=/usr/lib/pkgconfig/:/usr/local/lib/pkgconfig/                                                    0B        buildkit.dockerfile.v0
+ENV PATH=/wiz/server/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin                           0B        buildkit.dockerfile.v0
+MAINTAINER support@wiz.cn                                                                                            0B        buildkit.dockerfile.v0
+/bin/sh -c #(nop)  CMD ["/bin/bash"]                                                                                 0B        
+centos
+/bin/sh -c #(nop) ADD file:b3ebbe8bd304723d43b7b44a6d990cd657b63d93d6a2a9293983a30bfc1dfa53 in /                     204MB     
