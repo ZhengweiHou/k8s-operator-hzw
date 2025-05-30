@@ -7,3 +7,5 @@ docker run \
 -v ~/rundata/data_gitlab/log:/var/log/gitlab \
 -v ~/rundata/data_gitlab/data:/var/opt/gitlab \
 gitlab/gitlab-ce:10.2.4-ce.0
+
+# root:P@ssw0rd
