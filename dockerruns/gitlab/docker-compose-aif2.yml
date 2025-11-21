@@ -1,0 +1,26 @@
+version: "2"
+services:
+  gitlab_allinf:
+    image: gitlab/gitlab-ce:18.4.0-ce.0 
+    container_name: gitlab_allinf
+    hostname: 'allinfinance.gitlab.com'
+    ports:
+      #- "8443:443"
+      - "8020:80"
+      #- "80:80"
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://allinfinance.gitlab.com'  # 外部访问 URL
+        # 禁用 HTTPS 相关配置（可选，明确关闭）
+        nginx['redirect_http_to_https'] = false
+        nginx['ssl_certificate'] = ""
+        nginx['ssl_certificate_key'] = ""
+    volumes:
+      - /home/houzw/rundata/data_gitlab/allinf/etc:/etc/gitlab
+      - /home/houzw/rundata/data_gitlab/allinf/log:/var/log/gitlab
+      - /home/houzw/rundata/data_gitlab/allinf/data:/var/opt/gitlab
+    deploy:
+      resources:
+        limits:
+          memory: 5G
+

@@ -1,0 +1,26 @@
+version: "2"
+services:
+  gitlab_aif:
+    image: gitlab/gitlab-ce:18.4.0-ce.0 
+    container_name: gitlab_aif
+    hostname: 'git.houzw.cn'
+    ports:
+      #- "8443:443"
+      - "8010:80"
+      #- "80:80"
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://git.houzw.cn'  # 外部访问 URL
+        # 禁用 HTTPS 相关配置（可选，明确关闭）
+        nginx['redirect_http_to_https'] = false
+        nginx['ssl_certificate'] = ""
+        nginx['ssl_certificate_key'] = ""
+    volumes:
+      - /home/houzw/rundata/data_gitlab/aif/etc:/etc/gitlab
+      - /home/houzw/rundata/data_gitlab/aif/log:/var/log/gitlab
+      - /home/houzw/rundata/data_gitlab/aif/data:/var/opt/gitlab
+    deploy:
+      resources:
+        limits:
+          memory: 5G
+

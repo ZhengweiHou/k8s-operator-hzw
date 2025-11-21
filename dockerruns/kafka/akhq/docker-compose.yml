@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  kafka_akhq:
+    container_name: kafka_akhq
+    image: tchiotludo/akhq
+#    ports:
+#      - "9000:8080"
+    network_mode: "host"
+
+#    environment:
+#      KAFKA_CLUSTERS_0_NAME: local
+#      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 192.168.137.151:9092
+    volumes:
+      - ./application.yml:/app/application.yml

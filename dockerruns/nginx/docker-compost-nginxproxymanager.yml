@@ -1,0 +1,13 @@
+version: '3'
+services:
+  nginx_pm:
+    container_name: nginx_pm
+    image: jc21/nginx-proxy-manager:2.12.6 
+    network_mode: host
+    ports:
+      - '80:80'    # HTTP端口
+      - '81:81'    # 管理界面端口
+      - '443:443'  # HTTPS端口
+    volumes:
+      - /home/houzw/rundata/DATA_nginx/nginxproxymanager/data:/data
+      - /home/houzw/rundata/DATA_nginx/nginxproxymanager/letsencrypt:/etc/letsencrypt
