@@ -1,0 +1,9 @@
+version: '3.5'
+services:
+  dolphine-standalone:
+    image: apache/dolphinscheduler-standalone-server:3.3.2
+    container_name: dolphin-standalone
+    ports:
+      - 12345:12345
+      - 25333:25333
+# default pwd: admin dolphinscheduler123
