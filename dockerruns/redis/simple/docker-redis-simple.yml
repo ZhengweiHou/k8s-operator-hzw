@@ -1,0 +1,8 @@
+# docker run -d --name redis -p 6379:6379 redis:7.2.5
+version: '3'
+services:
+  redis-simple:
+    image: redis:7.2.5
+    container_name: redis-simple
+    ports:
+      - 6379:6379

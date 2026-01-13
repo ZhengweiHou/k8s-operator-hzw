@@ -3,6 +3,18 @@ services:
   dolphine-standalone:
     image: apache/dolphinscheduler-standalone-server:3.3.2
     container_name: dolphin-standalone
+    environment:
+      DATABASE: mysql
+      SPRING_PROFILES_ACTIVE: mysql
+      SPRING_DATASOURCE_URL: "jdbc:mysql://172.17.0.1:3306/dolphin"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+      RESOURCE_STORAGE_UPLOAD_BASE_PATH: "/tmp/dolphinescheduler_hzw"
+#      DATA_BASEDIR_PATH: "/tmp/dolphinescheduler_hzw"
+    volumes:
+      - ./mysql-connector-java-8.0.30.jar:/opt/dolphinscheduler/standalone-server/libs/mysql-con.jar
+      - ./plugins:/opt/dolphinscheduler/plugins
+      - /home/houzw/rundata/DATA_dolphinschedule/resource_storage:/tmp/dolphinescheduler_hzw
     ports:
       - 12345:12345
       - 25333:25333
